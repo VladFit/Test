@@ -6,10 +6,10 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using Test.Data;
-using Test.Models;
-using Test.Models.ViewModels;
-using Test.Utility;
+using Test_DataAccess;
+using Test_Models;
+using Test_Models.ViewModels;
+using Test_Utility;
 
 namespace Test.Controllers
 {

@@ -20,4 +20,10 @@
     <Folder Include="wwwroot\images\product\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Test_DataAccess\Test_DataAccess.csproj" />
+    <ProjectReference Include="..\Test_Models\Test_Models.csproj" />
+    <ProjectReference Include="..\Test_Utility\Test_Utility.csproj" />
+  </ItemGroup>
+
 </Project>
