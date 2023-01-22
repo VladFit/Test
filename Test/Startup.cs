@@ -13,6 +13,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Test_DataAccess;
+using Test_DataAccess.Repository;
+using Test_DataAccess.Repository.IRepository;
 using Test_Utility;
 
 namespace Test
@@ -46,6 +48,8 @@ namespace Test
                 Options.Cookie.HttpOnly = true;
                 Options.Cookie.IsEssential = true;
             });
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+
             services.AddControllersWithViews();
         }
 
