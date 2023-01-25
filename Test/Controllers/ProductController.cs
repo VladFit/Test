@@ -31,13 +31,13 @@ namespace Test.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<Product> objList = _prodRepo.GetAll(includeRpoperties: "Category ,ApplicationType");
+            IEnumerable<Product> objList = _prodRepo.GetAll(includeProperties: "Category,ApplicationType");
 
-           // foreach(var obj in objList)
+            //foreach(var obj in objList)
             //{
             //    obj.Category = _db.Category.FirstOrDefault(u => u.Id == obj.CategoryId);
             //    obj.ApplicationType = _db.ApplicationType.FirstOrDefault(u => u.Id == obj.ApplicationTypeId);
-           // };
+            //};
 
             return View(objList);
         }
