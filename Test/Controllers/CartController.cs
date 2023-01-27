@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -100,6 +101,8 @@ namespace Test.Controllers
         [ActionName("Summary")]
         public async Task<IActionResult> SummaryPost(ProductUserVM ProductUserVM)
         {
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
 
             var PathToTemplate = _webHostEnvironment.WebRootPath + Path.DirectorySeparatorChar.ToString()
                 + "templates" + Path.DirectorySeparatorChar.ToString() +
@@ -129,6 +132,30 @@ namespace Test.Controllers
                productListSB.ToString());
 
             await _emailSender.SendEmailAsync(WC.EmailAdmin, subject, messageBody);
+
+            InquiryHeader inquiryHeader = new InquiryHeader()
+            {
+                ApplicationUserId = claim.Value,
+                FullName = ProductUserVM.ApplicationUser.FullName,
+                Email = ProductUserVM.ApplicationUser.Email,
+                PhoneNumber = ProductUserVM.ApplicationUser.PhoneNumber,
+                InquiryDate = DateTime.Now
+
+            };
+
+            _inqHRepo.Add(inquiryHeader);
+            _inqHRepo.Save();
+
+            foreach (var prod in ProductUserVM.ProductList)
+            {
+                InquiryDetail inquiryDetail = new InquiryDetail()
+                {
+                    InquiryHeaderId = inquiryHeader.Id,
+                    ProductId = prod.Id,
+                };
+                _inqDRepo.Add(inquiryDetail);
+            }
+            _inqHRepo.Save();
 
             return RedirectToAction(nameof(InquiryConfirmation));
         }
