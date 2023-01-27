@@ -21,7 +21,7 @@ namespace Test_DataAccess.Repository.IRepository
 
         T FirstOrDefault(
             Expression<Func<T, bool>> filter = null,
-            string includeRpoperties = null,
+            string includeProperties = null,
             bool isTracking = true
             );
 

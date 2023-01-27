@@ -162,7 +162,7 @@ namespace Test.Controllers
             {
                 return NotFound();
             }
-            Product product = _prodRepo.FirstOrDefault(u=>u.Id==id, includeRpoperties: "Category, ApplicationType");
+            Product product = _prodRepo.FirstOrDefault(u=>u.Id==id, includeProperties: "Category, ApplicationType");
             //product.Category = _db.Category.Find(product.CategoryId);
             if (product == null)
             {
