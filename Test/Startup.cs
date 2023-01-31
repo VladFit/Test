@@ -16,6 +16,7 @@ using Test_DataAccess;
 using Test_DataAccess.Repository;
 using Test_DataAccess.Repository.IRepository;
 using Test_Utility;
+using Test_Utility.BrainTree;
 
 namespace Test
 {
@@ -48,6 +49,8 @@ namespace Test
                 Options.Cookie.HttpOnly = true;
                 Options.Cookie.IsEssential = true;
             });
+            services.Configure<BrainTreeSettings>(Configuration.GetSection("BrainTree"));
+            services.AddSingleton<IBrainTreeGate, BrainTreeGate>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IApplicationTypeRepository, ApplicationTypeRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
