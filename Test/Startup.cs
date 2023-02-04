@@ -60,6 +60,12 @@ namespace Test
             services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
             services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
 
+            services.AddAuthentication().AddFacebook(Options =>
+            {
+                Options.AppId = "479069794437283";
+                Options.AppSecret = "c3052aa8339fedfdf7993fe4ad0e1f59";
+            });
+
             services.AddControllersWithViews();
         }
 
